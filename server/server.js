@@ -1,8 +1,29 @@
 import express from 'express';
+import cors from 'cors';
+import { router as productRouter } from './routes/products.route.js';
 process.loadEnvFile();
 const app = express();
 const port = process.env.PORT || 3000;
 
+app.use(express.json());
+app.use(
+    cors({
+        origin: 'http://localhost:5173',// Cors setup for api calls
+    })
+);
+
+
+app.use('/api/products', productRouter);//products route
+
+
+
+
+
+app.use((req, res) => {
+    res.status(404).json({
+        message: 'Route not found',
+    });
+});
 app.listen(port, () => {
     console.log(`Server listing to http://localhost/${port}`);
 });
