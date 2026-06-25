@@ -34,3 +34,27 @@ VALUES (
 -- Insert data into 'users'
 INSERT INTO users (id, username,email,password_hash,active,role,created_by)
 VALUES ('f90b1f25-ea77-4e3f-af94-573aacbdc093', 'aayush_100','aayush.t200@gmail.com','test123',TRUE,'admin','dd0692ec-00db-4412-853f-ba17fe434f26');
+
+
+INSERT INTO products (
+    id,
+    title,
+    description,
+    price,
+    category_id,
+    active,
+    quantity,
+    updated_at,
+    created_by
+)
+VALUES (
+    $1,
+    $2,
+    #3,
+    $4,
+    $5,
+    $6,
+    $7,
+    NOW(),
+    $8
+);
