@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import { router as productRouter } from './routes/products.route.js';
 import { router as userRouter } from './routes/users.route.js';
+import { router as categoryRouter } from './routes/category.route.js';
 process.loadEnvFile();
 const app = express();
 const port = process.env.PORT || 3000;
@@ -15,6 +16,7 @@ app.use(
 
 app.use('/api/products', productRouter); //products route
 app.use('/api/users', userRouter); //user route
+app.use('/api/category', categoryRouter); //category route
 app.use((req, res) => {
     res.status(404).json({
         message: 'Route not found',

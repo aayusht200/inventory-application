@@ -8,7 +8,8 @@ import {
     createEmpty,
 } from '../controller/products.controller.js';
 import { authenticateUser } from '../middleware/authenticate.middleware.js';
-import { validateAdmin } from '../middleware/product.middleware.js';
+import { validateAdmin } from '../middleware/validate.middleware.js';
+
 const router = express.Router();
 
 router.get('/', getProducts);

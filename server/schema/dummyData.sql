@@ -23,8 +23,7 @@ VALUES (
 );
 
 -- Insert data into 'category'
-INSERT INTO category (id, name,description,created_by
-)
+INSERT INTO category (id, name,description,created_by)
 VALUES (
     '757df1cb-3811-49ee-a527-b8eacf69a642',
     'mobile',
