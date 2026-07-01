@@ -1,22 +1,13 @@
 import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
-import { pool } from '../connection.js';
-import { query } from '../queries/authanticateQueries.js';
-import { response } from 'express';
+
 
 const authanticateUser = (req, res, next) => {
-    const values = [req.body.email];
-    pool.query(query.getPassword, values)
-        .then((response) => {
-            console.log(response.rows);
-        })
-        .catch((err) => {
-            console.log(err);
-            res.status(500).json({
-                message: 'Internal Server Error',
-            });
-        });
-    res.status(201).send();
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+    if (token === null) res.status(401).send({ message: 'unauthorized user' });
+    console.log(authHeader);
+    console.log(token);
+    next();
 };
 
 export { authanticateUser };
