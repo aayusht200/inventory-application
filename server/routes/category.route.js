@@ -5,7 +5,7 @@ import express from 'express';
 const router = express.Router();
 
 router.get('/getAll', getAll);
-router.get('/create', authenticateUser, createEmptyCategory);
-router.post('/create', authenticateUser, createCategory);
+router.get('/create', authenticateUser, validateAdmin, createEmptyCategory);
+router.post('/create', authenticateUser, validateAdmin, createCategory);
 
 export { router };
