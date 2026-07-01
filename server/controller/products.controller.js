@@ -72,8 +72,8 @@ export const deleteProduct = (req, res) => {
 };
 
 export const createProduct = (req, res) => {
-    const { id, title, description, price, category_id, active, quantity, created_by } = req.body;
-    const values = [id, title, description, price, category_id, active, quantity, created_by];
+    const { id, title, description, price, category_id, active, quantity } = req.body;
+    const values = [id, title, description, price, category_id, active, quantity, req.user.id];
     pool.query(query.create, values)
         .then((response) => {
             if (response.rowCount <= 0) {

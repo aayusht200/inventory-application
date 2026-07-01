@@ -7,14 +7,15 @@ import {
     updateProduct,
     createEmpty,
 } from '../controller/products.controller.js';
-
+import { authenticateUser } from '../middleware/authenticate.middleware.js';
+import { validateAdmin } from '../middleware/product.middleware.js';
 const router = express.Router();
 
 router.get('/', getProducts);
-router.get('/new', createEmpty);
-router.post('/new', createProduct);
+router.get('/new', authenticateUser, validateAdmin, createEmpty);
+router.post('/new', authenticateUser, validateAdmin, createProduct);
 router.get('/:id', getOneProduct);
-router.put('/:id', updateProduct);
-router.delete('/:id', deleteProduct);
+router.put('/:id', authenticateUser, validateAdmin, updateProduct);
+router.delete('/:id', authenticateUser, validateAdmin, deleteProduct);
 
 export { router };

@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-const authanticateUser = (req, res, next) => {
+const authenticateUser = (req, res, next) => {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
     if (token === null) res.status(401).send({ message: 'unauthorized user' });
@@ -13,4 +13,4 @@ const authanticateUser = (req, res, next) => {
     }
 };
 
-export { authanticateUser };
+export { authenticateUser };
