@@ -54,3 +54,9 @@ ALTER TABLE category
 ADD CONSTRAINT fk_users_id_category
 FOREIGN KEY (created_by)
 REFERENCES users(id);
+
+
+
+
+
+

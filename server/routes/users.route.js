@@ -1,8 +1,10 @@
 import express from 'express';
 import { authanticateUser } from '../middleware/authenticate.middleware.js';
-import { login } from '../controller/users.controller.js';
+import { login, signupUser, adminCreateUser } from '../controller/users.controller.js';
 const router = express.Router();
 
-router.post('/login', authanticateUser, login);
+router.post('/login', login);
+router.post('/signup', signupUser);
+router.post('/signup-admin', authanticateUser, adminCreateUser);
 
 export { router };
