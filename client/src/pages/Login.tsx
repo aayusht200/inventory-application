@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { Card } from "./Card";
+import { Card } from "../components/Card";
 import { authService } from "../helperFunctions/authService";
-import { Input } from "./Input";
-import { Header } from "./Header";
-import { Button } from "./Button";
-import { InputError } from "./InputError";
-import { ResetButton } from "./ResetButton";
+import { Input } from "../components/Input";
+import { Header } from "../components/Header";
+import { Button } from "../components/Button";
+import { InputError } from "../components/InputError";
+import { ResetButton } from "../components/ResetButton";
 import { useNavigate } from "react-router";
 const initialLoginState = {
   email: "",
