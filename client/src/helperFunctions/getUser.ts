@@ -14,7 +14,8 @@ const getUser = async () => {
       return response.json();
     })
     .then((data) => {
-      console.log(data);
       return data;
     });
 };
+
+export { getUser };

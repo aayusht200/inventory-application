@@ -6,12 +6,18 @@ export interface User {
   role: "admin" | "user";
 }
 
+export interface AuthContextType {
+  user: User;
+  setUser: React.Dispatch<React.SetStateAction<User>>;
+}
+
 export const initialUser: User = {
   username: "",
   email: "",
   role: "user",
 };
 
-const AuthContext = createContext<User>(initialUser);
-
-export { AuthContext };
+export const AuthContext = createContext<AuthContextType>({
+  user: initialUser,
+  setUser: () => {},
+});

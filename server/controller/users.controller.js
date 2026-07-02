@@ -20,7 +20,14 @@ const login = (req, res) => {
                             },
                             process.env.JWT_SECRET
                         );
-                        res.status(200).json({ accessToken: accessToken });
+                        res.status(200).json({
+                            accessToken: accessToken,
+                            user: {
+                                username: response.rows[0].username,
+                                email: response.rows[0].email,
+                                role: response.rows[0].role,
+                            },
+                        });
                     } else res.status(401).send({ message: 'wrong password entered' });
                 });
             } else {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Card } from "../components/Card";
 import { authService } from "../helperFunctions/authService";
 import { Input } from "../components/Input";
@@ -6,7 +6,10 @@ import { Header } from "../components/Header";
 import { Button } from "../components/Button";
 import { InputError } from "../components/InputError";
 import { ResetButton } from "../components/ResetButton";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
+import { getUser } from "../helperFunctions/getUser";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 const initialLoginState = {
   email: "",
   password: "",
@@ -16,13 +19,15 @@ const errorStatement = "Incorrect Email/Password Address";
 const Login = () => {
   const [login, setLogin] = useState(initialLoginState);
   const [errorState, setError] = useState("");
+  const { setUser } = useContext(AuthContext);
   const navigate = useNavigate();
   function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
     authService(login)
       .then((data) => {
         localStorage.setItem("accessToken", data.accessToken);
-        console.log(data);
+        setUser(data.user);
+        navigate("/product");
       })
       .catch(() => {
         setError(errorStatement);
