@@ -1,0 +1,206 @@
+@import "tailwindcss";
+
+@theme {
+  /* Typography */
+  --text-xxs: 0.5rem;
+  --text-label-xxxs: 0.25rem;
+
+  /* App */
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-card: var(--card);
+
+  /* Text */
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-heading: var(--heading);
+
+  /* Borders */
+  --color-border: var(--border);
+  --color-divider: var(--divider);
+
+  /* Brand */
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-secondary: var(--secondary);
+
+  /* Status */
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+
+  /* Inputs */
+  --color-input: var(--input);
+  --color-input-border: var(--input-border);
+  --color-input-focus: var(--input-focus);
+
+  /* Buttons */
+  --color-button: var(--button);
+  --color-button-hover: var(--button-hover);
+  --color-button-text: var(--button-text);
+
+  /* Sidebar */
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-text: var(--sidebar-text);
+
+  /* Navbar */
+  --color-navbar: var(--navbar);
+  --color-navbar-border: var(--navbar-border);
+
+  /* Success */
+  --color-success: var(--success);
+  --color-success-bg: var(--success-bg);
+  --color-success-border: var(--success-border);
+  --color-success-text: var(--success-text);
+
+  /* Warning */
+  --color-warning: var(--warning);
+  --color-warning-bg: var(--warning-bg);
+  --color-warning-border: var(--warning-border);
+  --color-warning-text: var(--warning-text);
+
+  /* Danger */
+  --color-danger: var(--danger);
+  --color-danger-bg: var(--danger-bg);
+  --color-danger-border: var(--danger-border);
+  --color-danger-text: var(--danger-text);
+
+  /* Info */
+  --color-info: var(--info);
+  --color-info-bg: var(--info-bg);
+  --color-info-border: var(--info-border);
+  --color-info-text: var(--info-text);
+}
+
+:root {
+  /* App */
+  --background: theme(colors.slate.950);
+  --surface: theme(colors.slate.900);
+  --card: theme(colors.slate.800);
+
+  /* Text */
+  --text: theme(colors.slate.100);
+  --text-muted: theme(colors.slate.400);
+  --heading: theme(colors.white);
+
+  /* Borders */
+  --border: theme(colors.slate.700);
+  --divider: theme(colors.slate.800);
+
+  /* Brand */
+  --primary: theme(colors.sky.400);
+  --primary-hover: theme(colors.sky.300);
+  --secondary: theme(colors.cyan.400);
+
+  /* Inputs */
+  --input: theme(colors.slate.800);
+  --input-border: theme(colors.slate.600);
+  --input-focus: theme(colors.sky.400);
+
+  /* Buttons */
+  --button: theme(colors.sky.500);
+  --button-hover: theme(colors.sky.400);
+  --button-text: theme(colors.white);
+
+  /* Sidebar */
+  --sidebar: theme(colors.slate.900);
+  --sidebar-border: theme(colors.slate.800);
+  --sidebar-text: theme(colors.slate.100);
+
+  /* Navbar */
+  --navbar: theme(colors.slate.900);
+  --navbar-border: theme(colors.slate.800);
+
+  /* Success */
+  --success: theme(colors.emerald.600);
+  --success-bg: theme(colors.emerald.50);
+  --success-border: theme(colors.emerald.300);
+  --success-text: theme(colors.emerald.900);
+
+  /* Warning */
+  --warning: theme(colors.amber.600);
+  --warning-bg: theme(colors.amber.50);
+  --warning-border: theme(colors.amber.300);
+  --warning-text: theme(colors.amber.900);
+
+  /* Danger */
+  --danger: theme(colors.red.600);
+  --danger-bg: theme(colors.red.50);
+  --danger-border: theme(colors.red.300);
+  --danger-text: theme(colors.red.900);
+
+  /* Info */
+  --info: theme(colors.sky.600);
+  --info-bg: theme(colors.sky.50);
+  --info-border: theme(colors.sky.300);
+  --info-text: theme(colors.sky.900);
+}
+
+[data-theme="light"] {
+  /* App */
+  --background: theme(colors.slate.100);
+  --surface: theme(colors.white);
+  --card: theme(colors.slate.50);
+
+  /* Text */
+  --text: theme(colors.slate.900);
+  --text-muted: theme(colors.slate.500);
+  --heading: theme(colors.slate.950);
+
+  /* Borders */
+  --border: theme(colors.slate.200);
+  --divider: theme(colors.slate.100);
+
+  /* Brand */
+  --primary: theme(colors.sky.600);
+  --primary-hover: theme(colors.sky.700);
+  --secondary: theme(colors.cyan.600);
+
+  /* Inputs */
+  --input: theme(colors.white);
+  --input-border: theme(colors.slate.300);
+  --input-focus: theme(colors.sky.500);
+
+  /* Buttons */
+  --button: theme(colors.sky.600);
+  --button-hover: theme(colors.sky.700);
+  --button-text: theme(colors.white);
+
+  /* Sidebar */
+  --sidebar: theme(colors.white);
+  --sidebar-border: theme(colors.slate.200);
+  --sidebar-text: theme(colors.slate.900);
+
+  /* Navbar */
+  --navbar: theme(colors.white);
+  --navbar-border: theme(colors.slate.200);
+
+  /* Success */
+  --success: theme(colors.emerald.600);
+  --success-bg: theme(colors.emerald.50);
+  --success-border: theme(colors.emerald.200);
+  --success-text: theme(colors.emerald.800);
+
+  /* Warning */
+  --warning: theme(colors.amber.600);
+  --warning-bg: theme(colors.amber.50);
+  --warning-border: theme(colors.amber.200);
+  --warning-text: theme(colors.amber.800);
+
+  /* Danger */
+  --danger: theme(colors.red.600);
+  --danger-bg: theme(colors.red.50);
+  --danger-border: theme(colors.red.200);
+  --danger-text: theme(colors.red.800);
+
+  /* Info */
+  --info: theme(colors.sky.600);
+  --info-bg: theme(colors.sky.50);
+  --info-border: theme(colors.sky.200);
+  --info-text: theme(colors.sky.800);
+}
+
+@theme {
+  --animate-spin-once: spin 500ms linear 1;
+}

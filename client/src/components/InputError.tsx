@@ -1,14 +1,17 @@
 interface InputErrorProps {
-    message: string;
+  message: string;
+  className?: string;
 }
-const InputError = ({ message }: InputErrorProps) => {
-    return (
-        <>
-            <span className="border shadow rounded  pr-4 pl-4 bg-blue-50 text text-red-400 font-medium w-fit">
-                {message}
-            </span>
-        </>
-    );
+const InputError = ({ message, className }: InputErrorProps) => {
+  return (
+    <>
+      <span
+        className={`text-danger bg-danger-bg border-danger w-fit rounded-lg p-1 pr-4 pl-4 font-medium shadow ${className ?? ""}`}
+      >
+        {message}
+      </span>
+    </>
+  );
 };
 
 export { InputError };

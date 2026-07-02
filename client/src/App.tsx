@@ -1,9 +1,5 @@
-import { Login } from './components/Login';
-
+import { Login } from "./components/Login";
+import "./App.css";
 export default function App() {
-    return (
-        <div>
-            <Login />
-        </div>
-    );
+  return <Login />;
 }
