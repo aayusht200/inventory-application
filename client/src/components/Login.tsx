@@ -6,6 +6,7 @@ import { Header } from "./Header";
 import { Button } from "./Button";
 import { InputError } from "./InputError";
 import { ResetButton } from "./ResetButton";
+import { useNavigate } from "react-router";
 const initialLoginState = {
   email: "",
   password: "",
@@ -15,6 +16,7 @@ const errorStatement = "Incorrect Email/Password Address";
 const Login = () => {
   const [login, setLogin] = useState(initialLoginState);
   const [errorState, setError] = useState("");
+  const navigate = useNavigate();
   function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
     authService(login)
@@ -33,7 +35,9 @@ const Login = () => {
     }));
     setError("");
   }
-  function handleSignUp() {}
+  function handleSignUp() {
+    navigate("/signup");
+  }
 
   return (
     <Card
@@ -74,7 +78,7 @@ const Login = () => {
           <Button type="submit" content="Submit" className="" />
           <Button
             type="button"
-            content="SignUp"
+            content="Sign Up"
             onClick={handleSignUp}
             className=""
           />

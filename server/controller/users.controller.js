@@ -1,5 +1,5 @@
 import { pool } from '../connection.js';
-import { query } from '../queries/authanticateQueries.js';
+import { query } from '../queries/userQueries.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import { response } from 'express';
@@ -96,4 +96,16 @@ const adminCreateUser = (req, res) => {
         });
 };
 
-export { login, signupUser, adminCreateUser };
+const getCurrentUser = (req, res) => {
+    const test = req.user;
+    pool.query(query.getuser, [test.email])
+        .then((response) => {
+            res.status(200).send({ user: response.rows[0] });
+        })
+        .catch((error) => {
+            res.status(500).json({
+                message: 'Internal Server Error',
+            });
+        });
+};
+export { login, signupUser, adminCreateUser, getCurrentUser };
