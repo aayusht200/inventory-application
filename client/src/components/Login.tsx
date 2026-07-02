@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Card } from './Card';
 
-const userLogin = {
+const initialLoginState = {
     email: '',
     password: '',
 };
@@ -11,7 +11,7 @@ interface HeaderProps {
 }
 const errorStatement = 'Incorrect Email/Password Address';
 const Login = () => {
-    const [login, setLogin] = useState(userLogin);
+    const [login, setLogin] = useState(initialLoginState);
     const [errorState, setError] = useState('');
     function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
         e.preventDefault();
@@ -25,8 +25,10 @@ const Login = () => {
         })
             .then((response) => {
                 if (!response.ok) {
-                    return response.json();
-                } else setError(() => errorStatement);
+                    setError(errorStatement);
+                    throw new Error('Login failed');
+                }
+                return response.json();
             })
             .then((data) => {
                 localStorage.setItem('accessToken', data.accessToken);
@@ -39,7 +41,10 @@ const Login = () => {
 
     return (
         <Card className="login" header={<Header className="" title="Inventory App" />}>
-            <form onSubmit={handleSubmit} className="flex flex-col gap-4 text-md md:text-lg lg:text-xl">
+            <form
+                onSubmit={handleSubmit}
+                className="flex flex-col gap-4 text-md md:text-lg lg:text-xl p-5 rounded-2xl shadow bg-blue-300"
+            >
                 <label htmlFor="email" className="font-bold">
                     Email:
                 </label>
