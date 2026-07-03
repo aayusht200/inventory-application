@@ -30,11 +30,16 @@ const Signup = () => {
   const navigate = useNavigate();
   const signup = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
-    signupService(newUser).then(() => {
-      if (user.role !== "admin") {
-        navigate(`/login`);
-      } else navigate("/products");
-    });
+    signupService(newUser)
+      .then(() => {
+        if (user.role !== "admin") {
+          navigate(`/login`, { replace: true });
+        } else navigate("/products", { replace: true });
+      })
+      .catch((error) => {
+        setErrorMessage(true);
+        console.log(error);
+      });
   };
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setErrorMessage(false);

@@ -5,6 +5,7 @@ import { Login } from "./pages/Login";
 import { Signup } from "./pages/Signup";
 import { Products } from "./pages/Products";
 export default function App() {
+  // localStorage.clear();
   return (
     <BrowserRouter>
       <Routes>
