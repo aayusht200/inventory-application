@@ -9,6 +9,7 @@ import { AuthContext } from "../context/AuthContext";
 const Products = () => {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
+  // getAllProduct();
   const headercontent = (
     <Header
       title="Inventory App"

@@ -36,5 +36,3 @@ VALUES ('f90b1f25-ea77-4e3f-af94-573aacbdc093', 'aayush_100','aayush.t200@gmail.
 
 
 
--- Select all rows from 'users'
-SELECT * FROM users;

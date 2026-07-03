@@ -92,6 +92,7 @@ const Signup = () => {
             type="password"
             onChange={handleChange}
             value={newUser.password}
+            className="select-none"
           />
           {user.role === "admin" && (
             <fieldset className="border-divider flex gap-4 border p-1 pl-2">

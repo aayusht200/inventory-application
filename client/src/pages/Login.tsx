@@ -27,7 +27,7 @@ const Login = () => {
       .then((data) => {
         localStorage.setItem("accessToken", data.accessToken);
         setUser(data.user);
-        navigate("/product");
+        navigate("/products", { replace: true });
       })
       .catch(() => {
         setError(errorStatement);

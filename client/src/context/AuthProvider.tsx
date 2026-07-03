@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { AuthContext, initialUser, type User } from "./AuthContext";
-import { getUser } from "../helperFunctions/getUser";
+import { getUser } from "../helperFunctions/getUser.js";
 
 interface AuthProviderProps {
   children: React.ReactNode;
@@ -15,6 +15,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
       .then((user) => setUser(user))
       .catch((error) => {
         console.error(error);
+        setUser(initialUser);
       });
   }, []);
   return (
