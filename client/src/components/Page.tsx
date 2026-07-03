@@ -1,16 +1,16 @@
 import type { ReactNode } from "react";
 
-interface CardProps {
+interface PageProps {
   header?: ReactNode;
   children: ReactNode;
   footer?: ReactNode;
   className?: string;
 }
 
-const Card = ({ header, children, footer, className }: CardProps) => {
+const Page = ({ header, children, footer, className }: PageProps) => {
   return (
     <div
-      className={`card bg-card text-text flex h-dvh w-dvw flex-col gap-20 p-5 ${className ?? ""}`}
+      className={`page bg-card text-text flex h-dvh w-dvw flex-col gap-20 p-5 ${className ?? ""}`}
     >
       {header && <div className="">{header} </div>}
       <div className="flex h-full items-start justify-center">{children}</div>
@@ -19,4 +19,4 @@ const Card = ({ header, children, footer, className }: CardProps) => {
   );
 };
 
-export { Card };
+export { Page };

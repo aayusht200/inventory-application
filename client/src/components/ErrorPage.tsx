@@ -1,4 +1,4 @@
-import { Card } from "./Card";
+import { Page } from "./Page";
 
 interface ErrorPageProps {
   code: number;
@@ -7,10 +7,10 @@ interface ErrorPageProps {
 
 const ErrorPage = ({ code, title }: ErrorPageProps) => {
   return (
-    <Card>
+    <Page>
       <h1>{code}</h1>
       <h2>{title}</h2>
-    </Card>
+    </Page>
   );
 };
 

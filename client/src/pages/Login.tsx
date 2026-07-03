@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../components/Button";
-import { Card } from "../components/Card";
+import { Page } from "../components/Page";
 import { Header } from "../components/Header";
 import { Input } from "../components/Input";
 import { InputError } from "../components/InputError";
@@ -49,7 +49,7 @@ const Login = () => {
       title="Inventory App / Login"
       rightContent={
         <HomeIcon
-          className="size-4 cursor-pointer md:size-6 lg:size-8"
+          className="icon"
           onClick={() => {
             navigate("/products");
           }}
@@ -58,7 +58,7 @@ const Login = () => {
     />
   );
   return (
-    <Card className="login" header={headercontent}>
+    <Page className="login" header={headercontent}>
       <form
         onSubmit={handleSubmit}
         className="text-md bg-surface flex flex-col items-center gap-4 rounded-2xl p-8 shadow md:text-lg lg:text-xl"
@@ -99,7 +99,7 @@ const Login = () => {
           />
         </div>
       </form>
-    </Card>
+    </Page>
   );
 };
 

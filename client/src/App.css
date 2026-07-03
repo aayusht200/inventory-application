@@ -204,3 +204,9 @@
 @theme {
   --animate-spin-once: spin 500ms linear 1;
 }
+
+@layer components {
+  .icon {
+    @apply size-4 cursor-pointer md:size-6 lg:size-8;
+  }
+}

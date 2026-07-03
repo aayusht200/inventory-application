@@ -1,7 +1,7 @@
 import { AuthContext } from "../context/AuthContext";
 import React, { useContext, useState } from "react";
 import { Header } from "../components/Header";
-import { Card } from "../components/Card";
+import { Page } from "../components/Page";
 import { Input } from "../components/Input";
 import { ResetButton } from "../components/ResetButton";
 import { Button } from "../components/Button";
@@ -56,7 +56,7 @@ const Signup = () => {
       title="Inventory App / Signup"
       rightContent={
         <HomeIcon
-          className="size-4 cursor-pointer md:size-6 lg:size-8"
+          className="icon"
           onClick={() => {
             navigate("/products");
           }}
@@ -65,7 +65,7 @@ const Signup = () => {
     />
   );
   return (
-    <Card header={headercomponent}>
+    <Page header={headercomponent}>
       <form
         onSubmit={signup}
         className="text-md bg-surface flex flex-col items-center gap-4 rounded-2xl p-8 shadow md:text-lg lg:text-xl"
@@ -125,7 +125,7 @@ const Signup = () => {
           <Button type="submit" content="Signup" className="" />
         </div>
       </form>
-    </Card>
+    </Page>
   );
 };
 
