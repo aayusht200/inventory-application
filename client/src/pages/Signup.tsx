@@ -8,6 +8,7 @@ import { Button } from "../components/Button";
 import { InputError } from "../components/InputError";
 import { signupService } from "../helperFunctions/signupService";
 import { useNavigate } from "react-router-dom";
+import { HomeIcon } from "@heroicons/react/16/solid";
 
 interface NewUser {
   username: string;
@@ -49,7 +50,20 @@ const Signup = () => {
     }));
   };
   const errorstatement = "Username / Email already in use.";
-  const headercomponent = <Header title="Inventory App / Signup" />;
+  const headercomponent = (
+    <Header
+      className=""
+      title="Inventory App / Signup"
+      rightContent={
+        <HomeIcon
+          className="size-4 cursor-pointer md:size-6 lg:size-8"
+          onClick={() => {
+            navigate("/products");
+          }}
+        />
+      }
+    />
+  );
   return (
     <Card header={headercomponent}>
       <form

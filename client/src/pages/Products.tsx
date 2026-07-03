@@ -1,5 +1,10 @@
+
 const Products = () => {
-  return <div>Products</div>;
+  return (
+    <div className="size-6">
+  
+    </div>
+  );
 };
 
 export { Products };

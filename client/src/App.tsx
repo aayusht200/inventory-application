@@ -9,9 +9,10 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<Products />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/login" element={<Login />} />
         <Route
           path="*"
           element={<ErrorPage code={404} title="Page Not Found" />}

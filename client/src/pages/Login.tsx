@@ -8,6 +8,8 @@ import { InputError } from "../components/InputError";
 import { ResetButton } from "../components/ResetButton";
 import { AuthContext } from "../context/AuthContext";
 import { authService } from "../helperFunctions/authService";
+import { HomeIcon } from "@heroicons/react/16/solid";
+
 const initialLoginState = {
   email: "",
   password: "",
@@ -41,12 +43,22 @@ const Login = () => {
   function handleSignUp() {
     navigate("/signup");
   }
-
+  const headercontent = (
+    <Header
+      className=""
+      title="Inventory App / Login"
+      rightContent={
+        <HomeIcon
+          className="size-4 cursor-pointer md:size-6 lg:size-8"
+          onClick={() => {
+            navigate("/products");
+          }}
+        />
+      }
+    />
+  );
   return (
-    <Card
-      className="login"
-      header={<Header className="" title="Inventory App" />}
-    >
+    <Card className="login" header={headercontent}>
       <form
         onSubmit={handleSubmit}
         className="text-md bg-surface flex flex-col items-center gap-4 rounded-2xl p-8 shadow md:text-lg lg:text-xl"
@@ -90,4 +102,5 @@ const Login = () => {
     </Card>
   );
 };
+
 export { Login };
