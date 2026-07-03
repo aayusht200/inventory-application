@@ -1,5 +1,5 @@
 import type React from "react";
-
+import { ShoppingCartIcon } from "@heroicons/react/16/solid";
 interface HeaderProps {
   className?: string;
   title: string;

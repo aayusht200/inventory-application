@@ -1,11 +1,5 @@
 import type { ProductProps } from "../context/ProductContext";
-const ProductCard = ({
-  title,
-  price,
-  image_url,
-  quantity,
-  description,
-}: ProductProps) => {
+const ProductCard = ({ title, price, image_url, quantity }: ProductProps) => {
   return (
     <div className="card-body text-text bg-primary flex h-75 w-30 flex-col gap-3 rounded-2xl p-1 text-center shadow md:h-100 md:w-60 lg:h-125 lg:w-75">
       <div className="image h-3/4 rounded-2xl bg-white">
