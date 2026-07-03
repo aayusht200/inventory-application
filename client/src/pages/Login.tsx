@@ -1,15 +1,13 @@
-import { useState } from "react";
-import { Card } from "../components/Card";
-import { authService } from "../helperFunctions/authService";
-import { Input } from "../components/Input";
-import { Header } from "../components/Header";
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "../components/Button";
+import { Card } from "../components/Card";
+import { Header } from "../components/Header";
+import { Input } from "../components/Input";
 import { InputError } from "../components/InputError";
 import { ResetButton } from "../components/ResetButton";
-import { useNavigate } from "react-router-dom";
-import { getUser } from "../helperFunctions/getUser";
-import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { authService } from "../helperFunctions/authService";
 const initialLoginState = {
   email: "",
   password: "",

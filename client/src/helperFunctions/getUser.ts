@@ -14,7 +14,7 @@ const getUser = async () => {
       return response.json();
     })
     .then((data) => {
-      return data;
+      return data.user;
     });
 };
 

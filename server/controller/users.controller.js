@@ -18,7 +18,10 @@ const login = (req, res) => {
                                 role: response.rows[0].role,
                                 email: response.rows[0].email,
                             },
-                            process.env.JWT_SECRET
+                            process.env.JWT_SECRET,
+                            {
+                                expiresIn: '1h',
+                            }
                         );
                         res.status(200).json({
                             accessToken: accessToken,
