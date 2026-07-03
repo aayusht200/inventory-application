@@ -3,15 +3,15 @@ import "./App.css";
 import { ErrorPage } from "./components/ErrorPage";
 import { Login } from "./pages/Login";
 import { Signup } from "./pages/Signup";
-import { Products } from "./pages/Products";
+import { ProductGrid } from "./pages/ProductGrid";
 export default function App() {
   // localStorage.clear();
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Products />} />
+        <Route path="/" element={<ProductGrid />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/products" element={<Products />} />
+        <Route path="/products" element={<ProductGrid />} />
         <Route path="/login" element={<Login />} />
         <Route
           path="*"

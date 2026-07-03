@@ -10,12 +10,7 @@ export interface ProductProps {
   price: number;
   quantity: number;
   title: string;
-}
-
-export interface ProductContextProps {
-  products: ProductProps[];
-  setProducts: React.Dispatch<React.SetStateAction<ProductProps[]>>;
-  loading: boolean;
+  image_url: string;
 }
 
 const initialProduct = {
@@ -28,12 +23,20 @@ const initialProduct = {
   price: 0,
   quantity: 0,
   title: "",
+  image_url: "",
 };
+export interface ProductContextProps {
+  products: ProductProps[];
+  setProducts: React.Dispatch<React.SetStateAction<ProductProps[]>>;
+  loading: boolean;
+  error: string | null;
+}
 
 const ProductContext = createContext<ProductContextProps>({
   products: [initialProduct],
   setProducts: () => {},
   loading: true,
+  error: null,
 });
 
 export { ProductContext };

@@ -6,9 +6,14 @@ const getAllProduct = async () => {
     },
     credentials: "include",
   })
-    .then((response) => response.json())
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Fetching failed");
+      }
+      return response.json();
+    })
     .then((data) => {
-      console.log(data);
+      return data;
     });
 };
 
