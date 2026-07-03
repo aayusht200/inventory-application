@@ -10,7 +10,7 @@ interface PageProps {
 const Page = ({ header, children, footer, className }: PageProps) => {
   return (
     <div
-      className={`page bg-card text-text flex h-dvh w-dvw flex-col gap-20 p-5 ${className ?? ""}`}
+      className={`page bg-card text-text h-vh flex w-vw flex-col gap-20 p-5 ${className ?? ""}`}
     >
       {header && <div className="">{header} </div>}
       <div className="flex h-full items-start justify-center">{children}</div>

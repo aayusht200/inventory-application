@@ -59,7 +59,7 @@ const EmptyState = () => {
 };
 const RenderGrid = ({ products }: RenderGridProps) => {
   return (
-    <div className="product-grid grid grid-cols-4 gap-5">
+    <div className="product-grid grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4">
       {products.map((product) => {
         if (product.active === false) return;
         return <ProductCard key={product.id} {...product} />;

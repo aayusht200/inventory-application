@@ -100,7 +100,7 @@
 
   /* Buttons */
   --button: theme(colors.sky.500);
-  --button-hover: theme(colors.sky.400);
+  --button-hover: theme(colors.sky.800);
   --button-text: theme(colors.white);
 
   /* Sidebar */
