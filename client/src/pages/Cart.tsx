@@ -3,7 +3,6 @@ import { Header } from "../components/Header";
 import { HomeIcon } from "@heroicons/react/16/solid";
 import { Page } from "../components/Page";
 import { Button } from "../components/Button";
-import { Input } from "../components/Input";
 import { CartContext } from "../context/CartContext";
 import { ProductContext } from "../context/ProductContext";
 import { AuthContext } from "../context/AuthContext";

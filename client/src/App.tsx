@@ -7,8 +7,6 @@ import { ProductGrid } from "./pages/ProductGrid";
 import { Cart } from "./pages/Cart";
 import { Settings } from "./pages/Settings";
 export default function App() {
-  console.log(localStorage);
-
   // localStorage.clear();
   return (
     <BrowserRouter>

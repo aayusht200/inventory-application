@@ -1,8 +1,8 @@
 # Inventory Application
 
-A full-stack inventory management application with a React/TypeScript frontend and an Express/PostgreSQL backend. The project includes user signup/login, JWT-based authentication, role-aware admin flows, product and category API routes, and PostgreSQL schema files for inventory data.
+A full-stack inventory and shopping-cart application built with a React/TypeScript frontend and an Express/PostgreSQL backend. The app supports product browsing, product images served from the backend, user signup/login, JWT-based authentication, role-aware admin flows, and per-user cart persistence in `localStorage`.
 
-> Note: this project is still in active development. The backend product/category/user APIs are mostly wired, while the current product page UI is still a placeholder and the client product fetch helper is not implemented yet.
+> Note: this project is still in active development. Product browsing and cart behavior are implemented on the frontend, while admin-facing product/category management screens are not yet built.
 
 ## Tech Stack
 
@@ -12,6 +12,7 @@ A full-stack inventory management application with a React/TypeScript frontend a
 - TypeScript
 - Vite
 - React Router
+- React Context
 - Tailwind CSS
 - Heroicons
 - Oxlint
@@ -25,6 +26,7 @@ A full-stack inventory management application with a React/TypeScript frontend a
 - JSON Web Tokens
 - bcrypt
 - CORS
+- Nodemon
 
 ## Project Structure
 
@@ -32,16 +34,17 @@ A full-stack inventory management application with a React/TypeScript frontend a
 .
 ├── client
 │   ├── src
-│   │   ├── components          # Shared UI components
-│   │   ├── context             # Auth context/provider
-│   │   ├── helperFunctions     # Auth/signup/user/product services
-│   │   ├── pages               # Products, Login, Signup pages
-│   │   ├── App.tsx             # Client routes
-│   │   └── main.tsx            # React app entry
+│   │   ├── components          # Shared UI, product, cart, and page components
+│   │   ├── context             # Auth, product, and cart providers
+│   │   ├── helperFunctions     # API service helpers
+│   │   ├── pages               # Product grid, cart, login, signup, settings
+│   │   ├── App.tsx             # Client-side routes
+│   │   └── main.tsx            # React provider tree and app entry
 │   └── package.json
 └── server
     ├── controller              # Route handlers
-    ├── middleware              # Auth and admin validation
+    ├── middleware              # JWT auth and admin validation
+    ├── public/images           # Static product images
     ├── queries                 # SQL query strings
     ├── routes                  # Express routers
     ├── schema                  # Database schema and seed SQL
@@ -52,30 +55,37 @@ A full-stack inventory management application with a React/TypeScript frontend a
 
 ## Features
 
+- Product grid that fetches products from the backend API
+- Product cards with image, title, price, and add/remove cart controls
+- Backend-served product images from `server/public/images`
+- Cart page with line items, quantity controls, clear-cart action, and INR total
+- Cart badge showing the current item count
+- Per-user cart persistence using `localStorage` keys in the format `cart:<username>`
 - User signup and login
 - Password hashing with bcrypt
-- JWT access tokens
-- Authenticated current-user lookup
-- Admin-only account creation
-- Admin-only product create/update/delete routes
-- Admin-only category creation routes
+- JWT access tokens stored on the client as `accessToken`
+- Auth restoration through `/api/users/getuser`
+- Logout flow through the settings page
+- Admin-only account creation UI when logged in as an admin
+- Admin-protected product and category API routes
 - PostgreSQL-backed users, products, and categories
-- React auth context with localStorage token restoration
-- Login and signup forms with basic error handling
+- Light/dark theme tokens defined in CSS variables
 
-## Current App Routes
-
-### Frontend
+## Frontend Routes
 
 | Route | Description |
 | --- | --- |
-| `/` | Products page |
-| `/products` | Products page |
+| `/` | Product grid |
+| `/products` | Product grid |
+| `/cart` | Shopping cart |
 | `/login` | Login page |
 | `/signup` | Signup page |
+| `/setting` | Settings/logout page |
 | `*` | 404 page |
 
-### Backend
+## Backend API Routes
+
+### Products
 
 | Method | Endpoint | Access | Description |
 | --- | --- | --- | --- |
@@ -85,9 +95,19 @@ A full-stack inventory management application with a React/TypeScript frontend a
 | `GET` | `/api/products/:id` | Public | Get one product |
 | `PUT` | `/api/products/:id` | Admin | Update a product |
 | `DELETE` | `/api/products/:id` | Admin | Delete a product |
+
+### Categories
+
+| Method | Endpoint | Access | Description |
+| --- | --- | --- | --- |
 | `GET` | `/api/category/getAll` | Public | Get all categories |
 | `GET` | `/api/category/create` | Admin | Get an empty category object |
 | `POST` | `/api/category/create` | Admin | Create a category |
+
+### Users
+
+| Method | Endpoint | Access | Description |
+| --- | --- | --- | --- |
 | `POST` | `/api/users/signup` | Public | Create a standard user |
 | `POST` | `/api/users/login` | Public | Login and receive an access token |
 | `GET` | `/api/users/getuser` | Authenticated | Get the current user |
@@ -95,13 +115,13 @@ A full-stack inventory management application with a React/TypeScript frontend a
 
 ## Database
 
-The database schema defines three main tables:
+The database contains three main tables:
 
 - `users`
 - `category`
 - `products`
 
-Schema and seed files are available in:
+Schema and seed files are in:
 
 ```text
 server/schema/
@@ -110,11 +130,7 @@ server/schema/
 └── tableSchema.sql
 ```
 
-The tables use UUID primary keys and foreign keys for:
-
-- product category ownership
-- product creator ownership
-- category creator ownership
+The tables use UUID primary keys and foreign-key relationships for product categories, product creators, and category creators.
 
 ## Environment Variables
 
@@ -127,6 +143,7 @@ DB_PASSWORD=your_postgres_password
 DB_HOST=localhost
 DB_NAME=inventory
 JWT_SECRET=your_jwt_secret
+CLIENT_ORIGIN=http://localhost:5174
 ```
 
 ## Getting Started
@@ -151,7 +168,7 @@ npm install
 
 Create the database and tables using the SQL files in `server/schema`.
 
-At minimum, create the `inventory` database and run the table creation SQL from:
+At minimum, create the `inventory` database and run:
 
 ```text
 server/schema/createtionQuery.sql
@@ -177,6 +194,12 @@ The API runs on:
 http://localhost:3000
 ```
 
+The backend also serves static product images from:
+
+```text
+http://localhost:3000/images/<file-name>
+```
+
 ### 4. Start the Frontend
 
 From the `client` directory:
@@ -185,20 +208,13 @@ From the `client` directory:
 npm run dev
 ```
 
-The frontend runs on:
+Vite will print the frontend URL in the terminal. The backend CORS configuration reads from `CLIENT_ORIGIN` and falls back to:
 
 ```text
-http://localhost:5173
+http://localhost:5174
 ```
 
-## Development Notes
-
-- The server enables CORS for `http://localhost:5173`.
-- The client stores the JWT access token in `localStorage` under `accessToken`.
-- Admin-only routes require an `Authorization: Bearer <token>` header.
-- The current `Products` page renders the app shell but does not yet list product data.
-- `client/src/helperFunctions/productService.ts` currently contains a placeholder `getAllProduct` function.
-- Product deletion currently has a SQL typo in `server/queries/productQueries.js` (`productsWHERE`) that should be fixed before relying on delete behavior.
+If Vite starts on a different port, set `CLIENT_ORIGIN` in `server/.env` or start Vite on the matching port.
 
 ## Available Scripts
 
@@ -220,12 +236,28 @@ npm test
 
 `npm test` is currently a placeholder script in the server package.
 
+## Implementation Notes
+
+- The React app is wrapped in `AuthProvider`, `ProductProvider`, and `CartProvider`.
+- Products are fetched once through `ProductProvider` using `getAllProduct`.
+- Product image URLs are rendered as `http://localhost:3000${image_url}`.
+- Cart state is stored per logged-in username in `localStorage`.
+- Logging out removes the JWT token and resets the auth context.
+- The settings page currently contains the logout action.
+- Theme variables for light and dark modes are defined, but there is not yet a visible theme toggle.
+- Admin-only API routes require an `Authorization: Bearer <token>` header.
+
+## Known Issues / In Progress
+
+- Admin product/category management screens are not implemented yet.
+- The cart page uses a wide fixed grid layout in `CartCard`, so mobile responsiveness may need more work.
+- Automated tests are not implemented yet.
+
 ## Suggested Next Steps
 
-- Implement product fetching in the frontend product service.
-- Render product inventory cards or tables on the Products page.
-- Add create/edit product forms for admin users.
+- Add admin UI for creating and editing products/categories.
 - Fix the product delete SQL query.
-- Add request validation for product/category/user payloads.
-- Add frontend route protection for admin-only screens.
-- Add automated tests for authentication, products, and category routes.
+- Move API base URLs into environment variables.
+- Add route guards for authenticated/admin-only frontend pages.
+- Add checkout/order persistence if the cart is meant to become a real shopping flow.
+- Add tests for authentication, product fetching, cart behavior, and protected backend routes.
