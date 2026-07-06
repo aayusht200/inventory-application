@@ -7,6 +7,7 @@ import { AuthContext } from "../context/AuthContext";
 import { ProductContext } from "../context/ProductContext";
 import { ProductCard } from "../components/ProductCard";
 import type { ProductProps } from "../context/ProductContext";
+
 interface ErrorProps {
   error: string | null;
 }
