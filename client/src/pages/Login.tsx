@@ -90,7 +90,7 @@ const Login = () => {
         </fieldset>
         {errorState && <InputError message={errorState} />}
         <div className="form-actions flex gap-10">
-          <Button type="submit" content="Submit" className="" />
+          <Button type="submit" content="Login" className="" />
           <Button
             type="button"
             content="Sign Up"

@@ -9,7 +9,7 @@ import { InputError } from "../components/InputError";
 import { signupService } from "../helperFunctions/signupService";
 import { useNavigate } from "react-router-dom";
 import { HomeIcon } from "@heroicons/react/16/solid";
-
+import { CartTracker } from "../components/CartTracker";
 interface NewUser {
   username: string;
   email: string;
@@ -29,6 +29,7 @@ const Signup = () => {
   const [newUser, setNewUser] = useState<NewUser>(initialNewUser);
   const [error, setErrorMessage] = useState(false);
   const navigate = useNavigate();
+
   const signup = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     signupService(newUser)
@@ -55,12 +56,15 @@ const Signup = () => {
       className=""
       title="Inventory App / Signup"
       rightContent={
-        <HomeIcon
-          className="icon"
-          onClick={() => {
-            navigate("/products");
-          }}
-        />
+        <>
+          {user.role === "admin" && <CartTracker />}
+          <HomeIcon
+            className="icon"
+            onClick={() => {
+              navigate("/products");
+            }}
+          />
+        </>
       }
     />
   );

@@ -7,7 +7,7 @@ import { AuthContext } from "../context/AuthContext";
 import { ProductContext } from "../context/ProductContext";
 import { ProductCard } from "../components/ProductCard";
 import type { ProductProps } from "../context/ProductContext";
-
+import { CartTracker } from "../components/CartTracker";
 interface ErrorProps {
   error: string | null;
 }
@@ -22,13 +22,16 @@ const ProductGrid = () => {
     <Header
       title="Inventory App"
       rightContent={
-        <UserIcon
-          className="icon"
-          onClick={() => {
-            if (user.role != "admin") navigate("/login");
-            else navigate("/signup");
-          }}
-        />
+        <>
+          <CartTracker />
+          <UserIcon
+            className="icon"
+            onClick={() => {
+              if (user.username) navigate("/setting");
+              else navigate("/login");
+            }}
+          />
+        </>
       }
     />
   );

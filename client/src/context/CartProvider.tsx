@@ -2,6 +2,7 @@ import type React from "react";
 import { CartContext } from "./CartContext";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "./AuthContext";
+import { ProductContext } from "./ProductContext";
 interface CartProviderProps {
   children: React.ReactNode;
 }
@@ -10,14 +11,23 @@ const CartProvider = ({ children }: CartProviderProps) => {
   const [cart, setCart] = useState<Record<string, number>>({});
   const { user } = useContext(AuthContext);
   const [isDirty, setDirty] = useState<boolean>(false);
+  const { products } = useContext(ProductContext);
+
   useEffect(() => {
     if (!user.username) return;
-    localStorage.setItem(`cart:${user.username}`, JSON.stringify(cart));
+    else localStorage.setItem(`cart:${user.username}`, JSON.stringify(cart));
   }, [cart]);
   useEffect(() => {
+    if (!user.username) {
+      setCart({});
+      return;
+    }
     const localCart = localStorage.getItem(`cart:${user.username}`);
-    if (localCart) setCart(JSON.parse(localCart));
-    else setCart({});
+    if (localCart) {
+      setCart(JSON.parse(localCart));
+    } else {
+      setCart({});
+    }
   }, [user]);
 
   function addToCart(id: string) {
@@ -35,6 +45,12 @@ const CartProvider = ({ children }: CartProviderProps) => {
     } else setCart((prev) => ({ ...prev, [id]: (prev[id] ?? 0) - 1 }));
     setDirty(true);
   }
+  function getCartValue() {
+    return products
+      .filter((items) => cart[items.id])
+      .map((product) => product.price * cart[product.id])
+      .reduce((acc, curr) => acc + curr, 0);
+  }
   function clearCart() {
     setCart({});
     setDirty(true);
@@ -42,7 +58,7 @@ const CartProvider = ({ children }: CartProviderProps) => {
 
   return (
     <CartContext.Provider
-      value={{ cart, addToCart, removeFromCart, clearCart }}
+      value={{ cart, addToCart, removeFromCart, clearCart, getCartValue }}
     >
       {children}
     </CartContext.Provider>

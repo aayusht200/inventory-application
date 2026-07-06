@@ -1,7 +1,9 @@
+import type React from "react";
+
 interface ButtonProps {
   type?: React.ButtonHTMLAttributes<HTMLButtonElement>["type"];
   className?: string;
-  content: string;
+  content: string | React.ReactNode;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 

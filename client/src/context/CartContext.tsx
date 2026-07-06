@@ -1,9 +1,10 @@
-import React, { createContext } from "react";
+import { createContext } from "react";
 
 interface CartContext {
   cart: Record<string, number>;
   addToCart: (id: string) => void;
   removeFromCart: (id: string) => void;
+  getCartValue: () => number;
   clearCart: () => void;
 }
 
@@ -13,5 +14,6 @@ const CartContext = createContext<CartContext>({
   addToCart: () => {},
   removeFromCart: () => {},
   clearCart: () => {},
+  getCartValue: () => 0,
 });
 export { CartContext };
