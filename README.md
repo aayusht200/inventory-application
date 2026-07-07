@@ -1,8 +1,31 @@
 # Inventory Application
 
-A full-stack inventory and shopping-cart application built with a React/TypeScript frontend and an Express/PostgreSQL backend. The app supports product browsing, product images served from the backend, cart management, user signup/login, JWT-based authentication, role-aware admin settings, and per-user cart persistence in `localStorage`.
+A full-stack inventory and shopping-cart application built with a React/TypeScript frontend and an Express/PostgreSQL backend. The app supports product browsing, product images served from the backend, cart management, user signup/login, JWT-based authentication, role-based admin controls, PostgreSQL-backed inventory data, and per-user cart persistence in `localStorage`.
 
 > Note: this project is still in active development. Product browsing, cart behavior, profile/settings, admin user creation, category listing, and product edit/delete flows are implemented. Product/category creation UI and checkout/order persistence are not implemented yet.
+
+## Highlights
+
+- JWT authentication with bcrypt password hashing
+- Role-based authorization for admin-only operations
+- Product browsing with backend-served product images
+- Admin product edit/delete flow
+- PostgreSQL relational database with users, categories, and products
+- React Context state management for auth, products, and cart data
+- TypeScript frontend with typed context and service-layer models
+- Per-user cart persistence with `localStorage`
+- Reusable UI components for forms, pages, product cards, cart cards, and controls
+- Responsive product grid built with Tailwind CSS
+
+## Screenshots
+
+| Product Grid | Cart |
+| --- | --- |
+| ![Product Grid](docs/product-grid.png) | ![Cart](docs/cart.png) |
+
+| Settings | Admin Product Editor |
+| --- | --- |
+| ![Settings](docs/settings.png) | ![Admin Product Editor](docs/admin-product-editor.png) |
 
 ## Tech Stack
 
@@ -27,6 +50,24 @@ A full-stack inventory and shopping-cart application built with a React/TypeScri
 - bcrypt
 - CORS
 - Nodemon
+
+## Architecture
+
+```text
+React UI
+   |
+React Context Providers
+   |
+Client Service Layer
+   |
+Express API Routes
+   |
+Controllers
+   |
+SQL Query Modules
+   |
+PostgreSQL
+```
 
 ## Project Structure
 
@@ -53,26 +94,79 @@ A full-stack inventory and shopping-cart application built with a React/TypeScri
     └── package.json
 ```
 
-## Features
+## Feature Overview
 
-- Product grid that fetches products from the backend API
-- Product cards with image, title, price, and add/remove cart controls
-- Backend-served product images from `server/public/images`
-- Cart page with line items, quantity controls, clear-cart action, and INR total
-- Cart badge showing the current item count
-- Per-user cart persistence using `localStorage` keys in the format `cart:<username>`
+### Authentication
+
 - User signup and login
 - Password hashing with bcrypt
 - JWT access tokens stored on the client as `accessToken`
-- Auth restoration through `/api/users/getuser`
-- Settings page with profile, user, category, and product admin panels
-- Logout flow through the settings page
-- Admin-only account creation UI when logged in as an admin
-- Admin product list with edit/delete form
-- Admin category list
-- Admin-protected product and category API routes
-- PostgreSQL-backed users, products, and categories
-- Light/dark theme tokens defined in CSS variables
+- Auth restoration on page refresh through `/api/users/getuser`
+- Logout flow from the settings page
+
+### Authorization
+
+- Protected API routes using bearer tokens
+- Admin-only product and category API operations
+- Admin-only user creation flow
+- Settings page conditionally shows admin panels based on the authenticated user role
+
+### Inventory
+
+- Product grid fetches inventory from the backend API
+- Product cards display image, title, price, and cart controls
+- Product images are served as static Express assets from `server/public/images`
+- Admin product list allows selecting products for editing
+- Admin product editor supports updating core product fields
+- Admin product editor supports deleting products
+
+### Shopping Cart
+
+- Add and remove product quantity from product cards
+- Cart badge shows the current item count
+- Cart page displays line items, quantity controls, clear-cart action, and INR total
+- Cart data is persisted per logged-in user with `localStorage` keys in the format `cart:<username>`
+
+### Admin Panel
+
+- Profile panel for current user details
+- User creation panel for admin-created users/admins
+- Category listing panel
+- Product list and product edit/delete panel
+
+### Database
+
+- PostgreSQL database with users, categories, and products
+- UUID primary keys
+- Foreign-key relationships for product categories, product creators, and category creators
+
+## State Management
+
+The React app is organized around typed Context providers:
+
+- `AuthContext` manages the current user and auth restoration.
+- `ProductContext` loads and exposes product data, loading state, and fetch errors.
+- `CartContext` manages cart quantities, totals, clear-cart behavior, and per-user persistence.
+
+## Reusable Components
+
+The frontend uses reusable components instead of duplicating UI logic:
+
+- `Button`
+- `Input`
+- `InputError`
+- `Header`
+- `Page`
+- `ResetButton`
+- `ProductCard`
+- `CartCard`
+- `CartTracker`
+- `SignupForm`
+- `ProductCrud`
+- `ProductForm`
+- `CategoryCrud`
+- `Profile`
+- `ErrorPage`
 
 ## Frontend Routes
 
@@ -252,18 +346,38 @@ npm test
 - Theme variables for light and dark modes are defined, but there is not yet a visible theme toggle.
 - Admin-only API routes require an `Authorization: Bearer <token>` header.
 
-## Known Issues / In Progress
+## Live Demo
 
-- Product creation UI is not implemented yet.
-- Category creation/edit/delete UI is not implemented yet.
-- The cart page uses a wide fixed grid layout in `CartCard`, so mobile responsiveness may need more work.
+No live deployment is configured yet.
+
+When deployed, add links here:
+
+- Frontend:
+- Backend/API:
+
+## Roadmap
+
+- Product creation UI
+- Category creation, edit, and delete UI
+- Checkout flow
+- Order history
+- Product image upload
+- Product search
+- Product filtering
+- Pagination
+- Toast notifications
+- Frontend route guards for authenticated/admin-only screens
+- Environment-based API base URLs
+- Automated tests for auth, products, cart behavior, and protected routes
+- Mobile improvements for the cart page
+
+## Known Limitations
+
+- The cart page currently uses a wide fixed grid layout in `CartCard`, so mobile responsiveness needs more work.
+- Theme variables for light and dark modes are defined, but there is not yet a visible theme toggle.
+- Checkout and order persistence are not implemented.
 - Automated tests are not implemented yet.
 
-## Suggested Next Steps
+## License
 
-- Add admin UI for creating products.
-- Add admin UI for creating, editing, and deleting categories.
-- Move API base URLs into environment variables.
-- Add route guards for authenticated/admin-only frontend pages.
-- Add checkout/order persistence if the cart is meant to become a real shopping flow.
-- Add tests for authentication, product fetching, cart behavior, and protected backend routes.
+MIT
