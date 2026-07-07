@@ -70,4 +70,24 @@ const updateProduct = async (updateProductDetails: updateProductProps) => {
     });
 };
 
-export { getAllProduct, getOneProduct, updateProduct };
+const deleteProduct = async (id: string) => {
+  const response = await fetch(`http://localhost:3000/api/products/${id}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+    },
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    throw new Error("Delete failed");
+  }
+
+  if (response.status === 204) {
+    return;
+  }
+
+  return response.json();
+};
+
+export { getAllProduct, getOneProduct, updateProduct, deleteProduct };

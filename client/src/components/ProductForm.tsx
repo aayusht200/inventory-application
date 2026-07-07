@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   getOneProduct,
   updateProduct,
+  deleteProduct,
 } from "../helperFunctions/productService";
 import { Input } from "./Input";
 import { Button } from "./Button";
@@ -49,10 +50,20 @@ const ProductForm = ({ productId, onBack }: ProductFormProps) => {
         setError(true);
       });
   }
+  function handleDelete() {
+    deleteProduct(productId)
+      .then(onBack)
+      .catch(() => {
+        setError(true);
+      });
+  }
   const errorstatement = "Update failed try aganin";
   return (
-    <form onSubmit={handleSubmit}>
-      <fieldset>
+    <form
+      onSubmit={handleSubmit}
+      className="text-md bg-surface flex h-fit flex-col items-center gap-4 rounded-2xl p-8 shadow md:text-lg lg:text-xl"
+    >
+      <fieldset className="input-fields relative flex flex-col gap-4">
         <Input
           label="Title:"
           value={formData?.title || "null"}
@@ -83,8 +94,9 @@ const ProductForm = ({ productId, onBack }: ProductFormProps) => {
         />
       </fieldset>
       {error && <InputError message={errorstatement} />}
-      <div className="form-action">
+      <div className="form-action form-actions flex gap-10">
         <Button content="Back" onClick={onBack} type="button" />
+        <Button content="Delete Product" onClick={handleDelete} type="button" />
         <Button content="Submit" type="submit" />
       </div>
     </form>
