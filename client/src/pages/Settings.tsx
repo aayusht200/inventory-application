@@ -9,7 +9,7 @@ import { CartTracker } from "../components/CartTracker";
 import { HomeIcon } from "@heroicons/react/16/solid";
 import { Page } from "../components/Page";
 import { Profile } from "../components/Profile";
-import { Signup } from "./Signup";
+import { SignupForm } from "../components/SignupForm";
 import { CategoryCrud } from "../components/CategoryCrud";
 import { ProductCrud } from "../components/ProductCrud";
 type SettingsView = "profile" | "users" | "categories" | "products";
@@ -17,13 +17,17 @@ const Settings = () => {
   const navigate = useNavigate();
   const { user, setUser } = useContext(AuthContext);
   const [activeView, setActiveView] = useState<SettingsView>("profile");
-
-  function renderContent() {
+  function handleLogout() {
+    setUser(initialUser);
+    logout();
+    navigate("/", { replace: true });
+  }
+  function getActiveView() {
     switch (activeView) {
       case "profile":
         return <Profile />;
       case "users":
-        return <Signup />;
+        return <SignupForm />;
       case "categories":
         return <CategoryCrud />;
       case "products":
@@ -49,18 +53,28 @@ const Settings = () => {
   );
   return (
     <Page className="" header={headercomponent}>
-      <div className="settings grid h-full w-full flex-1 grid-cols-[10rem_1fr] border">
-        <div className="navbar flex flex-col border-r p-4">
-          <Button content="Profile" onClick={() => setActiveView("profile")} />
+      <div className="settings h-vh grid w-full flex-1 grid-cols-[10rem_1fr]">
+        <div className="navbar flex flex-col gap-5 p-4">
+          <Button
+            content="Profile "
+            className="w-full"
+            onClick={() => setActiveView("profile")}
+          />
           {user.role === "admin" && (
             <>
-              <Button content="Users" onClick={() => setActiveView("users")} />
+              <Button
+                content="Users"
+                className="w-full"
+                onClick={() => setActiveView("users")}
+              />
               <Button
                 content="Categories"
+                className="w-full"
                 onClick={() => setActiveView("categories")}
               />
               <Button
                 content="Products"
+                className="w-full"
                 onClick={() => setActiveView("products")}
               />
             </>
@@ -70,14 +84,13 @@ const Settings = () => {
             <Button
               content="Logout"
               onClick={() => {
-                setUser(initialUser);
-                logout();
-                navigate("/", { replace: true });
+                handleLogout();
               }}
+              className="w-full"
             />
           </div>
         </div>
-        <div className="content">{renderContent()}</div>
+        <div className="content">{getActiveView()}</div>
       </div>
     </Page>
   );

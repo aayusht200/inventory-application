@@ -14,7 +14,7 @@ const Page = ({ header, children, footer, className }: PageProps) => {
     >
       {header}
 
-      <main className="flex flex-1 justify-center">{children}</main>
+      <main className="flex min-h-0 flex-1 justify-center">{children}</main>
 
       {footer}
     </div>
