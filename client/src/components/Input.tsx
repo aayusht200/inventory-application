@@ -3,7 +3,7 @@ interface InputProps {
   id: string;
   type: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
-  value: string;
+  value: string | number;
   className?: string;
   placeholder?: string;
 }

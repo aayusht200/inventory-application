@@ -21,7 +21,7 @@ const ProductProvider = ({ children }: ProductProviderProps) => {
       .finally(() => {
         setLoading(false);
       });
-  }, []);
+  }, [products]);
 
   return (
     <ProductContext.Provider value={{ products, setProducts, loading, error }}>
