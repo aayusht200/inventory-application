@@ -1,8 +1,8 @@
 # Inventory Application
 
-A full-stack inventory and shopping-cart application built with a React/TypeScript frontend and an Express/PostgreSQL backend. The app supports product browsing, product images served from the backend, user signup/login, JWT-based authentication, role-aware admin flows, and per-user cart persistence in `localStorage`.
+A full-stack inventory and shopping-cart application built with a React/TypeScript frontend and an Express/PostgreSQL backend. The app supports product browsing, product images served from the backend, cart management, user signup/login, JWT-based authentication, role-aware admin settings, and per-user cart persistence in `localStorage`.
 
-> Note: this project is still in active development. Product browsing and cart behavior are implemented on the frontend, while admin-facing product/category management screens are not yet built.
+> Note: this project is still in active development. Product browsing, cart behavior, profile/settings, admin user creation, category listing, and product edit/delete flows are implemented. Product/category creation UI and checkout/order persistence are not implemented yet.
 
 ## Tech Stack
 
@@ -34,7 +34,7 @@ A full-stack inventory and shopping-cart application built with a React/TypeScri
 .
 ├── client
 │   ├── src
-│   │   ├── components          # Shared UI, product, cart, and page components
+│   │   ├── components          # Shared UI, product, cart, settings, and CRUD components
 │   │   ├── context             # Auth, product, and cart providers
 │   │   ├── helperFunctions     # API service helpers
 │   │   ├── pages               # Product grid, cart, login, signup, settings
@@ -65,8 +65,11 @@ A full-stack inventory and shopping-cart application built with a React/TypeScri
 - Password hashing with bcrypt
 - JWT access tokens stored on the client as `accessToken`
 - Auth restoration through `/api/users/getuser`
+- Settings page with profile, user, category, and product admin panels
 - Logout flow through the settings page
 - Admin-only account creation UI when logged in as an admin
+- Admin product list with edit/delete form
+- Admin category list
 - Admin-protected product and category API routes
 - PostgreSQL-backed users, products, and categories
 - Light/dark theme tokens defined in CSS variables
@@ -80,7 +83,7 @@ A full-stack inventory and shopping-cart application built with a React/TypeScri
 | `/cart` | Shopping cart |
 | `/login` | Login page |
 | `/signup` | Signup page |
-| `/setting` | Settings/logout page |
+| `/setting` | Settings page with profile, logout, and admin panels |
 | `*` | 404 page |
 
 ## Backend API Routes
@@ -143,7 +146,7 @@ DB_PASSWORD=your_postgres_password
 DB_HOST=localhost
 DB_NAME=inventory
 JWT_SECRET=your_jwt_secret
-CLIENT_ORIGIN=http://localhost:5174
+CLIENT_ORIGIN=http://localhost:5173
 ```
 
 ## Getting Started
@@ -211,7 +214,7 @@ npm run dev
 Vite will print the frontend URL in the terminal. The backend CORS configuration reads from `CLIENT_ORIGIN` and falls back to:
 
 ```text
-http://localhost:5174
+http://localhost:5173
 ```
 
 If Vite starts on a different port, set `CLIENT_ORIGIN` in `server/.env` or start Vite on the matching port.
@@ -243,20 +246,23 @@ npm test
 - Product image URLs are rendered as `http://localhost:3000${image_url}`.
 - Cart state is stored per logged-in username in `localStorage`.
 - Logging out removes the JWT token and resets the auth context.
-- The settings page currently contains the logout action.
+- The settings page contains profile display, logout, and admin-only panels for users, categories, and products.
+- Product admins can select a product, edit core fields, submit updates, or delete the product.
+- Category admin UI currently lists categories fetched from the backend.
 - Theme variables for light and dark modes are defined, but there is not yet a visible theme toggle.
 - Admin-only API routes require an `Authorization: Bearer <token>` header.
 
 ## Known Issues / In Progress
 
-- Admin product/category management screens are not implemented yet.
+- Product creation UI is not implemented yet.
+- Category creation/edit/delete UI is not implemented yet.
 - The cart page uses a wide fixed grid layout in `CartCard`, so mobile responsiveness may need more work.
 - Automated tests are not implemented yet.
 
 ## Suggested Next Steps
 
-- Add admin UI for creating and editing products/categories.
-- Fix the product delete SQL query.
+- Add admin UI for creating products.
+- Add admin UI for creating, editing, and deleting categories.
 - Move API base URLs into environment variables.
 - Add route guards for authenticated/admin-only frontend pages.
 - Add checkout/order persistence if the cart is meant to become a real shopping flow.
