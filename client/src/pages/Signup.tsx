@@ -24,7 +24,11 @@ const initialNewUser: NewUser = {
   role: "user",
 };
 
-const Signup = () => {
+interface SignupProps {
+  showHeader?: boolean;
+}
+
+const Signup = ({ showHeader }: SignupProps) => {
   const { user } = useContext(AuthContext);
   const [newUser, setNewUser] = useState<NewUser>(initialNewUser);
   const [error, setErrorMessage] = useState(false);
@@ -51,13 +55,13 @@ const Signup = () => {
     }));
   };
   const errorstatement = "Username / Email already in use.";
-  const headercomponent = (
+  const headercomponent = showHeader && (
     <Header
       className=""
       title="Inventory App / Signup"
       rightContent={
         <>
-          {user.role === "admin" && <CartTracker />}
+          <CartTracker />
           <HomeIcon
             className="icon"
             onClick={() => {
@@ -72,7 +76,7 @@ const Signup = () => {
     <Page header={headercomponent}>
       <form
         onSubmit={signup}
-        className="text-md bg-surface flex flex-col items-center gap-4 rounded-2xl p-8 shadow md:text-lg lg:text-xl"
+        className="text-md bg-surface flex h-fit flex-col items-center gap-4 rounded-2xl p-8 shadow md:text-lg lg:text-xl"
       >
         <fieldset className="input-fields relative flex flex-col gap-4">
           <ResetButton resetFuncion={() => setNewUser(initialNewUser)} />

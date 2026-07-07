@@ -25,8 +25,8 @@ const Cart = () => {
           <UserIcon
             className="icon"
             onClick={() => {
-              if (user.role != "admin") navigate("/login");
-              else navigate("/signup");
+              if (user.username) navigate("/setting");
+              else navigate("/login");
             }}
           />
           <HomeIcon
@@ -46,22 +46,24 @@ const Cart = () => {
       </Page>
     );
   return (
-    <Page className="Carth" header={headercontent}>
-      <div className="cart-product flex flex-col gap-5">
+    <Page className="Cart" header={headercontent}>
+      <div className="cart-view flex flex-col gap-5">
         {products
           .filter((items) => cart[items.id])
           .map((product) => (
             <CartCard key={product.id} {...product} />
           ))}
-        <div className="clear-cart">
-          <Button content="Clear Cart" onClick={() => clearCart()} />
-        </div>
-        <div className="total self-end">
-          ₹
-          {total.toLocaleString("en-IN", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-          })}
+        <div className="cart-control flex items-center">
+          <div className="clear-cart">
+            <Button content="Clear Cart" onClick={() => clearCart()} />
+          </div>
+          <div className="total ml-auto">
+            ₹
+            {total.toLocaleString("en-IN", {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}
+          </div>
         </div>
       </div>
     </Page>

@@ -61,7 +61,7 @@ const Login = () => {
     <Page className="login" header={headercontent}>
       <form
         onSubmit={handleSubmit}
-        className="text-md bg-surface flex flex-col items-center gap-4 rounded-2xl p-8 shadow md:text-lg lg:text-xl"
+        className="text-md bg-surface flex h-fit flex-col items-center gap-4 rounded-2xl p-8 shadow md:text-lg lg:text-xl"
       >
         <fieldset className="input-fields relative flex flex-col gap-4">
           <ResetButton

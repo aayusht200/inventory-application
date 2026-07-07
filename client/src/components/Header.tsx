@@ -1,5 +1,5 @@
 import type React from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 interface HeaderProps {
   className?: string;
   title: string;
@@ -11,7 +11,7 @@ const Header = ({ className, title, rightContent }: HeaderProps) => {
 
   return (
     <div
-      className={`header ${className} text-heading text-shadow-heading grid grid-cols-2`}
+      className={`header ${className} text-heading text-shadow-heading grid grid-cols-2 pb-10`}
     >
       <div className="left col-span-1">
         {loaction.pathname === "/" ? (

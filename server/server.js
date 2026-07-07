@@ -6,7 +6,7 @@ import { router as categoryRouter } from './routes/category.route.js';
 process.loadEnvFile();
 const app = express();
 const port = process.env.PORT || 3000;
-const clientOrigin = process.env.CLIENT_ORIGIN || 'http://localhost:5174';
+const clientOrigin = process.env.CLIENT_ORIGIN || 'http://localhost:5173';
 app.use(express.static('public'));
 app.use(express.json());
 app.use(
