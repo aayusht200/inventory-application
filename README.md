@@ -1,8 +1,18 @@
 # Inventory Application
 
+![React](https://img.shields.io/badge/React-19-blue)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)
+![Node.js](https://img.shields.io/badge/Node.js-Express-green)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Neon-blue)
+![License](https://img.shields.io/badge/License-MIT-lightgrey)
+
 A full-stack inventory and shopping-cart application built with a React/TypeScript frontend and an Express/PostgreSQL backend. The app supports product browsing, product images served from the backend, cart management, user signup/login, JWT-based authentication, role-based admin controls, PostgreSQL-backed inventory data, and per-user cart persistence in `localStorage`.
 
 > Note: this project is still in active development. Product browsing, cart behavior, profile/settings, admin user creation, category listing, and product edit/delete flows are implemented. Product/category creation UI and checkout/order persistence are not implemented yet.
+
+## 🚀 Live Demo
+
+**Live Application:** https://inventory-application-cyan.vercel.app/
 
 ## Highlights
 
@@ -51,6 +61,12 @@ A full-stack inventory and shopping-cart application built with a React/TypeScri
 - CORS
 - Nodemon
 
+### Deployment
+
+- **Frontend:** Vercel
+- **Backend:** Render
+- **Database:** Neon PostgreSQL
+
 ## Architecture
 
 ```text
@@ -69,10 +85,12 @@ SQL Query Modules
 PostgreSQL
 ```
 
-## Project Structure
+## Repository Structure
+
+This project is organized as a monorepo.
 
 ```text
-.
+inventory-application/
 ├── client
 │   ├── src
 │   │   ├── components          # Shared UI, product, cart, settings, and CRUD components
@@ -345,15 +363,6 @@ npm test
 - Category admin UI currently lists categories fetched from the backend.
 - Theme variables for light and dark modes are defined, but there is not yet a visible theme toggle.
 - Admin-only API routes require an `Authorization: Bearer <token>` header.
-
-## Live Demo
-
-No live deployment is configured yet.
-
-When deployed, add links here:
-
-- Frontend:
-- Backend/API:
 
 ## Roadmap
 
