@@ -12,7 +12,7 @@ const CartProvider = ({ children }: CartProviderProps) => {
   const { user } = useContext(AuthContext);
   const [isDirty, setDirty] = useState<boolean>(false);
   const { products } = useContext(ProductContext);
-
+  console.log(isDirty);
   useEffect(() => {
     if (!user.username) return;
     else localStorage.setItem(`cart:${user.username}`, JSON.stringify(cart));

@@ -12,7 +12,7 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<ProductGrid />} />
-        <Route path="/signup" element={<Signup showHeader={true} />} />
+        <Route path="/signup" element={<Signup />} />
         <Route path="/products" element={<ProductGrid />} />
         <Route path="/login" element={<Login />} />
         <Route path="/cart" element={<Cart />} />

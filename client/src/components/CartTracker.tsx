@@ -1,5 +1,4 @@
 import { ShoppingCartIcon } from "@heroicons/react/16/solid";
-import { Button } from "./Button";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
