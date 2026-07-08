@@ -3,7 +3,9 @@ import cors from 'cors';
 import { router as productRouter } from './routes/products.route.js';
 import { router as userRouter } from './routes/users.route.js';
 import { router as categoryRouter } from './routes/category.route.js';
-process.loadEnvFile();
+if (process.env.NODE_ENV !== 'production') {
+    process.loadEnvFile();
+}
 const app = express();
 const port = process.env.PORT || 3000;
 const clientOrigin = process.env.CLIENT_ORIGIN || 'http://localhost:5173';
@@ -25,5 +27,5 @@ app.use((req, res) => {
     });
 });
 app.listen(port, () => {
-    console.log(`Server listing to http://localhost/${port}`);
+    console.log(`Server listening on port ${port}`);
 });

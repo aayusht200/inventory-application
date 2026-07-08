@@ -1,6 +1,5 @@
 import pg from 'pg';
 
-process.loadEnvFile();
 pg.types.setTypeParser(1082, (val) => val); //disables autoconversion of certain data types.
 
 const pool = new pg.Pool({
