@@ -10,9 +10,9 @@ interface CartProviderProps {
 const CartProvider = ({ children }: CartProviderProps) => {
   const [cart, setCart] = useState<Record<string, number>>({});
   const { user } = useContext(AuthContext);
-  const [isDirty, setDirty] = useState<boolean>(false);
+
   const { products } = useContext(ProductContext);
-  console.log(isDirty);
+
   useEffect(() => {
     if (!user.username) return;
     else localStorage.setItem(`cart:${user.username}`, JSON.stringify(cart));
@@ -32,7 +32,6 @@ const CartProvider = ({ children }: CartProviderProps) => {
 
   function addToCart(id: string) {
     setCart((prev) => ({ ...prev, [id]: (prev[id] ?? 0) + 1 }));
-    setDirty(true);
   }
   function removeFromCart(id: string) {
     if (cart[id] === 1) {
@@ -43,7 +42,6 @@ const CartProvider = ({ children }: CartProviderProps) => {
       // const newCart = Object.entries(cart).filter((items) => items[0] !== id);
       // setCart(Object.fromEntries(newCart));
     } else setCart((prev) => ({ ...prev, [id]: (prev[id] ?? 0) - 1 }));
-    setDirty(true);
   }
   function getCartValue() {
     return products
@@ -53,7 +51,6 @@ const CartProvider = ({ children }: CartProviderProps) => {
   }
   function clearCart() {
     setCart({});
-    setDirty(true);
   }
 
   return (
