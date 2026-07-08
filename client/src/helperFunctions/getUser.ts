@@ -1,5 +1,7 @@
 const getUser = async () => {
-  return fetch("http://localhost:3000/api/users/getuser", {
+  const API = import.meta.env.VITE_API_URL;
+
+  return fetch(`${API}/api/users/getuser`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

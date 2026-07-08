@@ -1,5 +1,6 @@
 async function categoryService() {
-  return fetch("http://localhost:3000/api/category/getAll", {
+  const API = import.meta.env.VITE_API_URL;
+  return fetch(`${API}/api/category/getAll`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

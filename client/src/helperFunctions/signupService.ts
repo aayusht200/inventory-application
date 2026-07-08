@@ -4,6 +4,7 @@ interface NewUser {
   password: string;
   role: "user" | "admin";
 }
+const API = import.meta.env.VITE_API_URL;
 
 const signupService = async (newUser: NewUser) => {
   if (newUser.role === "admin") return signupServiceAdmin(newUser);
@@ -11,7 +12,7 @@ const signupService = async (newUser: NewUser) => {
 };
 
 const signupServiceUser = async (newUser: NewUser) => {
-  return fetch("http://localhost:3000/api/users/signup", {
+  return fetch(`${API}/api/users/signup`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -27,7 +28,7 @@ const signupServiceUser = async (newUser: NewUser) => {
 };
 
 const signupServiceAdmin = async (newUser: NewUser) => {
-  return fetch("http://localhost:3000/api/users/signup-admin", {
+  return fetch(`${API}/api/users/signup-admin`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

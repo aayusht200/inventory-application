@@ -3,12 +3,12 @@ import { CartContext } from "../context/CartContext";
 import { useContext } from "react";
 const CartCard = ({ title, price, image_url, id }: ProductProps) => {
   const { cart, addToCart, removeFromCart } = useContext(CartContext);
-
+  const API = import.meta.env.VITE_API_URL;
   return (
     <div className="cart-card-body text-text bg-primary grid h-50 w-300 grid-cols-[140px_1fr_200px_100px] items-center justify-center rounded-2xl px-10 text-center shadow">
       <div className="grid h-9/10 items-center rounded-3xl bg-white">
         <img
-          src={`http://localhost:3000${image_url}`}
+          src={`${API}${image_url}`}
           alt={title}
           className="max-h-full max-w-full object-contain"
         />

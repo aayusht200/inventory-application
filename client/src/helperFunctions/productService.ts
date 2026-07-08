@@ -7,9 +7,10 @@ interface updateProductProps {
   active: true;
   quantity: number;
 }
+const API = import.meta.env.VITE_API_URL;
 
 const getAllProduct = async () => {
-  return fetch("http://localhost:3000/api/products", {
+  return fetch(`${API}/api/products`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -28,7 +29,7 @@ const getAllProduct = async () => {
 };
 
 const getOneProduct = async (id: string) => {
-  return fetch(`http://localhost:3000/api/products/${id}`, {
+  return fetch(`${API}/api/products/${id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -47,18 +48,15 @@ const getOneProduct = async (id: string) => {
 };
 
 const updateProduct = async (updateProductDetails: updateProductProps) => {
-  return fetch(
-    `http://localhost:3000/api/products/${updateProductDetails.id}`,
-    {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-      credentials: "include",
-      body: JSON.stringify(updateProductDetails),
+  return fetch(`${API}/api/products/${updateProductDetails.id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
     },
-  )
+    credentials: "include",
+    body: JSON.stringify(updateProductDetails),
+  })
     .then((response) => {
       if (!response.ok) {
         throw new Error("Update failed");
@@ -71,7 +69,7 @@ const updateProduct = async (updateProductDetails: updateProductProps) => {
 };
 
 const deleteProduct = async (id: string) => {
-  const response = await fetch(`http://localhost:3000/api/products/${id}`, {
+  const response = await fetch(`${API}/api/products/${id}`, {
     method: "DELETE",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
