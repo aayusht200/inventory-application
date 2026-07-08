@@ -8,7 +8,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 const app = express();
 const port = process.env.PORT || 3000;
-const clientOrigin = process.env.CLIENT_ORIGIN || 'http://localhost:5173';
+const ORIGIN = process.env.ORIGIN || 'http://localhost:5173';
 app.use(express.static('public'));
 app.use(express.json());
 app.use(
