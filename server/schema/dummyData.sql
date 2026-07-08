@@ -49,3 +49,7 @@ SET image_url = CASE id
     WHEN 'ea9a1dc2-74e4-489d-a8d2-1e6b3cbe6ef9' THEN '/images/usb-c-fast-charger.webp'
     WHEN '6db79b07-14e7-4f8f-a88c-0a3ef7dd6fb2' THEN '/images/mechanical-keyboard.webp'
 END;
+
+
+-- Select all rows from 'users'
+SELECT * FROM users;
